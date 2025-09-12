@@ -1,27 +1,25 @@
 
-# Getting Started with Swagger Petstore
+# Getting Started with Cypress Test API
 
 ## Introduction
 
-This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.
-
-Find out more about Swagger: [http://swagger.io](http://swagger.io)
+This is a sample API to demonstrate an OpenAPI spec with multiple endpoints and a custom model.
 
 ## Install the Package
 
 Install the gem from the command line:
 
 ```bash
-gem install rose-nielsen-sdk -v 0.0.6
+gem install rose-nielsen-sdk -v 0.0.7
 ```
 
 Or add the gem to your Gemfile and run `bundle`:
 
 ```ruby
-gem 'rose-nielsen-sdk', '0.0.6'
+gem 'rose-nielsen-sdk', '0.0.7'
 ```
 
-For additional gem details, see the [RubyGems page for the rose-nielsen-sdk gem](https://rubygems.org/gems/rose-nielsen-sdk/versions/0.0.6).
+For additional gem details, see the [RubyGems page for the rose-nielsen-sdk gem](https://rubygems.org/gems/rose-nielsen-sdk/versions/0.0.7).
 
 ## Test the SDK
 
@@ -33,13 +31,13 @@ rake
 
 ## Initialize the API Client
 
-**_Note:_** Documentation for the client can be found [here.](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.6/doc/client.md)
+**_Note:_** Documentation for the client can be found [here.](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.7/doc/client.md)
 
 The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| test_header | `String` | This is a test header<br>*Default*: `'TestHeaderDefaultValue'` |
+| default_host | `String` | *Default*: `'www.example.com'` |
 | environment | `Environment` | The API environment. <br> **Default: `Environment.PRODUCTION`** |
 | connection | `Faraday::Connection` | The Faraday connection object passed by the SDK user for making requests |
 | adapter | `Faraday::Adapter` | The Faraday adapter object passed by the SDK user for performing http requests |
@@ -50,77 +48,37 @@ The following parameters are configurable for the API Client:
 | retry_statuses | `Array` | A list of HTTP statuses to retry. <br> **Default: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524]** |
 | retry_methods | `Array` | A list of HTTP methods to retry. <br> **Default: %i[get put]** |
 | http_callback | `HttpCallBack` | The Http CallBack allows defining callables for pre and post API calls. |
-| proxy_settings | [`ProxySettings`](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.6/doc/proxy-settings.md) | Optional proxy configuration to route HTTP requests through a proxy server. |
-| api_key_credentials | [`ApiKeyCredentials`](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.6/doc/auth/custom-header-signature.md) | The credential object for Custom Header Signature |
-| http_basic_credentials | [`HttpBasicCredentials`](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.6/doc/auth/basic-authentication.md) | The credential object for Basic Authentication |
-| petstore_auth_credentials | [`PetstoreAuthCredentials`](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.6/doc/auth/oauth-2-implicit-grant.md) | The credential object for OAuth 2 Implicit Grant |
+| proxy_settings | [`ProxySettings`](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.7/doc/proxy-settings.md) | Optional proxy configuration to route HTTP requests through a proxy server. |
 
 The API client can be initialized as follows:
 
 ```ruby
-require 'swagger_petstore'
-include SwaggerPetstore
+require 'cypress_test_api'
+include CypressTestApi
 
 client = Client.new(
-  test_header: 'TestHeaderDefaultValue',
-  api_key_credentials: ApiKeyCredentials.new(
-    api_key: 'api_key'
-  ),
-  http_basic_credentials: HttpBasicCredentials.new(
-    username: 'username',
-    passwprd: 'passwprd'
-  ),
-  petstore_auth_credentials: PetstoreAuthCredentials.new(
-    o_auth_client_id: 'OAuthClientId',
-    o_auth_redirect_uri: 'OAuthRedirectUri',
-    o_auth_scopes: [
-      OAuthScopePetstoreAuthEnum::READPETS,
-      OAuthScopePetstoreAuthEnum::WRITEPETS
-    ]
-  ),
-  environment: Environment::PRODUCTION
+  environment: Environment::PRODUCTION,
+  default_host: 'www.example.com'
 )
 ```
 
-## Environments
-
-The SDK can be configured to use a different environment for making API calls. Available environments are:
-
-### Fields
-
-| Name | Description |
-|  --- | --- |
-| production | **Default** |
-| environment2 | - |
-| environment3 | - |
-
-## Authorization
-
-This API uses the following authentication schemes.
-
-* [`api_key (Custom Header Signature)`](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.6/doc/auth/custom-header-signature.md)
-* [`httpBasic (Basic Authentication)`](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.6/doc/auth/basic-authentication.md)
-* [`petstore_auth (OAuth 2 Implicit Grant)`](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.6/doc/auth/oauth-2-implicit-grant.md)
-
 ## List of APIs
 
-* [Pet](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.6/doc/controllers/pet.md)
-* [Store](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.6/doc/controllers/store.md)
-* [User](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.6/doc/controllers/user.md)
+* [API](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.7/doc/controllers/api.md)
 
 ## SDK Infrastructure
 
 ### Configuration
 
-* [ProxySettings](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.6/doc/proxy-settings.md)
+* [ProxySettings](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.7/doc/proxy-settings.md)
 
 ### HTTP
 
-* [HttpResponse](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.6/doc/http-response.md)
-* [HttpRequest](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.6/doc/http-request.md)
+* [HttpResponse](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.7/doc/http-response.md)
+* [HttpRequest](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.7/doc/http-request.md)
 
 ### Utilities
 
-* [ApiHelper](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.6/doc/api-helper.md)
-* [DateTimeHelper](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.6/doc/date-time-helper.md)
+* [ApiHelper](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.7/doc/api-helper.md)
+* [DateTimeHelper](https://www.github.com/ZahraN444/rose-nielsen-ruby-sdk/tree/0.0.7/doc/date-time-helper.md)
 
