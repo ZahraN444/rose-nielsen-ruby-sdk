@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'rose-nielsen-sdk'
-  s.version = '0.1.1'
+  s.version = '0.1.4'
   s.summary = 'test'
   s.description = 'Eiusmod facilis quis'
   s.authors = ['Zahra Naseem']
